@@ -5,8 +5,8 @@ const getRoles = (req, res) => {
   res.json({ roles })
 }
 
-// TODO: Create a new Role
-
+// TODO: Create a new Role and respond with the same data
+// TODO: testing
 module.exports = {
   getRoles
 }
