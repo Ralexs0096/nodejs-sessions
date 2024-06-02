@@ -7,6 +7,13 @@ const getRoles = (req, res) => {
 
 // TODO: Create a new Role
 
+const getName = (req, res) => {
+  const names = user.map(user => user.name);
+  res.json({names})
+}
+
+
 module.exports = {
+  getName,
   getRoles
 }
