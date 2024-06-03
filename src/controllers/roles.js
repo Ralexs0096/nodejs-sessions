@@ -6,7 +6,15 @@ const getRoles = (req, res) => {
 }
 
 // TODO: Create a new Role
+const newRole = (req,res) => {
+  roles.push(req.body);
+  res.send({
+    id: roles.indexOf(roles.at(-1)),
+    ...roles.at(-1)
+  });
+} 
 
 module.exports = {
-  getRoles
+  getRoles,
+  newRole
 }
