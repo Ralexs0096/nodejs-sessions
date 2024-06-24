@@ -7,8 +7,6 @@ const getRoles = (req, res) => {
   res.json({ roles })
 }
 
-// TODO: Create a new Role of arrays
-
 const createNewRole = (req, res) => {
   const newRole = req.body.role;
   if(newRole || existingRoles.includes(newRole)){
@@ -19,10 +17,6 @@ const createNewRole = (req, res) => {
 
     return res.send({role: [...existingRoles, newRole]})
   }
-
-  // if()
-  // const names = user.map(user => user.name);
-  // res.json({names})
 }
 
  
