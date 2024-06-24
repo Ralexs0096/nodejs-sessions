@@ -1,11 +1,9 @@
 const express = require('express') // singleton
 const router = express.Router()
-const { getRoles, getName } = require('../controllers/roles')
+const { getRoles, createNewRole } = require('../controllers/roles')
 
 router.get('/', getRoles)
-// TODO: new role
-router.post('/', getName)
-
+router.post('/createNewRole', createNewRole)
 module.exports = {
   rolesRoutes: router
 }
