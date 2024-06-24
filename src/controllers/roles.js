@@ -12,7 +12,7 @@ const getName = (req, res) => {
   res.json({names})
 }
 
-
+ 
 module.exports = {
   getName,
   getRoles
