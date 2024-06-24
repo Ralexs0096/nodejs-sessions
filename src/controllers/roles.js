@@ -1,22 +1,20 @@
 const { users } = require("./users");
 
-const existingRoles = users.map( user => user.role);
+const currentRoles = users.map( user => user.role);
 
 const getRoles = (req, res) => {
-  const roles = users.map(user => user.role);
-  res.json({ roles })
+  res.json({ currentRoles })
 }
 
 const createNewRole = (req, res) => {
   const newRole = req.body.role;
-  if(newRole || existingRoles.includes(newRole)){
-    return res.status().send({
-      error:true,
+   if(!newRole || currentRoles.includes(newRole)){
+     return res.status(418).send({
+     error:true,
       message: "New Role is already in used or the New Role is am empty string"
-    })
-
-    return res.send({role: [...existingRoles, newRole]})
+     })
   }
+  return res.send({role: [...currentRoles, newRole]})
 }
 
  
