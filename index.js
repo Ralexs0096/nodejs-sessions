@@ -1,57 +1,74 @@
-const fs = require('node:fs')
-const yargs = require('yargs')
+const fs = require("node:fs");
+const yargs = require("yargs");
 
-const fileName = 'tasks.txt'
+const fileName = "tasks.txt";
 
 const addTask = (description) => {
-  const task = `${description}\n`
+  const task = `${description}\n`;
 
-  fs.appendFile(`./${fileName}`, task, 'utf-8', (err) => {
+  fs.appendFile(`./${fileName}`, task, "utf-8", (err) => {
     if (err) {
       console.log(err);
-      return
+      return;
     }
-    console.log('Task added');
-  })
-}
+    console.log("Task added");
+  });
+};
 
-const listTasks = () => {
-  // TODO: handle non-existing tasks
-  fs.readFile(`./${fileName}`, 'utf-8', (err, data) => {
+const listTasks = () => { 
+  fs.readFile(`./${fileName}`, "utf-8", (err, data) => {
+    if (data === "") {
+      return console.log("No tasks found");
+    }
     if (err) {
       console.log(err);
-      return
+
+      return;
     }
-    console.log('Task List: ');
+    console.log("Task List: ");
     console.log(data);
-  })
-}
+  });
+};
+ 
 
-// TODO: delete all tasks
+const deleteAllTasks = () => {
+  fs.writeFile(`./${fileName}`, "", "utf-8", (err) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log("All task has been deleted.");
+  });
+};
 
 yargs.command({
-  command: 'add',
-  describe: 'Add a new task',
+  command: "add",
+  describe: "Add a new task",
   builder: {
     description: {
-      describe: 'Task description',
-      type: 'string'
+      describe: "Task description",
+      type: "string",
     },
   },
   handler(argv) {
-    addTask(argv.description)
-  }
-
-})
+    addTask(argv.description);
+  },
+});
 
 yargs.command({
-  command: 'list',
-  describe: 'List all tasks',
+  command: "list",
+  describe: "List all tasks",
   handler() {
-    listTasks()
-  }
-})
+    listTasks();
+  },
+});
+ 
 
-// TODO: delete all tasks - command
+yargs.command({
+  command: "delete-all",
+  describe: "Delete all tasks",
+  handler() {
+    deleteAllTasks();
+  },
+});
 
-yargs.parse()
+yargs.parse();
